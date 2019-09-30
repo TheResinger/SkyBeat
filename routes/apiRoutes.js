@@ -1,35 +1,57 @@
 var db = require("../models");
-// const bcrypt = require("bcrypt");
-// const saltRounds = 10;
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const passport = require("passport");
 
-module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
+module.exports = function (app) {
+  app.post("/register", (req, res) => {
+    console.log(req.body);
+    const { username, email, password } = req.body;
+    let errors = [];
+
+    // Check required fields
+    if (!username || !email || !password) {
+      errors.push({ msg: "Please fill in all fields" });
+    }
+
+    // Check Pass length
+    if (password.length < 6) {
+      errors.push({ msg: "Password should be at least 6 characters long" });
+    }
+
+    if (errors.length > 0) {
+      console.log(errors);
+      res.render("register", {
+        errors: errors,
+      });
+    } else {
+      bcrypt.hash(password, saltRounds, (err, hash) => {
+        if (err) {
+          throw err
+        }
+        db.user.create({
+          userName: username,
+          email: email,
+          password: hash
+        }).then(user => {
+          req.flash("success_msg", "You are now registered and can login.");
+          res.redirect("/login");
+        }).catch(err => console.log(err));
+      });
+    }
   });
 
-  // Create a new example
-  // app.post("/api/examples", function(req, res) {
-  //   db.Example.create(req.body).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
-  app.post("/api/newUser", (req, res) => {
-    console.log(req.body.userName);
-    // db.User.create(req.body).then(dbUsers => {
-    //   res.json(dbUsers);
-    // });
-    // bcrypt.genSalt(saltRounds, (err,salt) => {
-    //   bcrypt.hash()
-    // })
+  app.post("/login", (req, res, next) => {
+    passport.authenticate("local", {
+      successRedirect: "/dashboard",
+      failureRedirect: "/login",
+      failureFlash: true
+    })(req, res, next);
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(dbExample => {
-      res.json(dbExample);
-    });
+  app.get("/logout", (req, res) => {
+    req.logout();
+    req.flash("success_msg", "You are logged out.");
+    res.redirect("/login");
   });
 };
