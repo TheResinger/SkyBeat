@@ -1,12 +1,24 @@
-<div class="user-form">
-    <h1>Login</h1>
-    {{> messages}}
-    <form action="login" method="POST">
-        <input name="username" type="text" placeholder="Username" />
-        <input name="password" type="password" placeholder="Password" />
-        <input type="submit" />
-    </form>
-</div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{{> headerregister}}
+<section class="pb_cover_v3 overflow-hidden cover-bg-opacity text-left" id="section-home">
+    <div class="container">
+        {{> messages}}
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-white mb-3">SkyBeat</h2>
+                <div class="sub-heading text-white">
+                    <p class="mb-4">The new social media for music enthuasists.</p>
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5 relative align-self-center user-form" style="border: 1px solid black; padding-left: 0px; padding-right: 0px;">
+                <form action="login" class="bg-white pb_form_v1" method="POST">
+                    <h2 class="mb-4 mt-0 text-center">Sign In</h2>
+                    <input name="username" type="text" placeholder="Username" />
+                    <input name="password" type="password" placeholder="Password" />
+                    <input type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

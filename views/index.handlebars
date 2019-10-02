@@ -1,12 +1,27 @@
+{{> headermain}}
 <div id="home">
   <div class="container">
+    <div class="row"></div>
+    <br>
     <div class="row">
-      <div class="col-8 offset-2">
-        <a href="/register"><button class="btn btn-danger float-right">Register</button></a>
-        <a href="/login"><button class="btn btn-danger float-right">Login</button></a>
+      <div class="col-4">
+        {{!-- User Info and Genre Selection --}}
+        <div class="row">
+          {{!-- User Info --}}
+          {{> usercard}}
+        </div>
+        <br>
+        <div class="row">
+          {{!-- Genre Selection --}}
+          {{> genres}}
+        </div>
+      </div>
+      <div class="col-8" style="padding-right: 0px;">
+        {{!-- Posts section --}}
+        {{#each posts}}
+          {{> post}}
+        {{/each}}
       </div>
     </div>
   </div>
 </div>
-
-
