@@ -1,0 +1,34 @@
+<div class="user-form">
+    <h1>New Post</h1>
+    <form id="newPost">
+        <input placeholder="Enter Song Name" type="text" class="" id="songName" required />
+        <input type="text" id="artistName" placeholder="Enter Artist Here" required />
+        <select id="genre">
+            <option value="none" selected disabled hidden>Select a Genre</option>
+            <option value="Alternative">Alternative</option>
+            <option value="Blues">Blues</option>
+            <option value="Classical">Classical</option>
+            <option value="Country">Country</option>
+            <option value="Dance">Dance</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Hip-Hop/Rap">Hip-Hop/Rap</option>
+            <option value="Jazz">Jazz</option>
+            <option value="Latin">Latin</option>
+            <option value="Pop">Pop</option>
+            <option value="R&B/Soul">R&B/Soul</option>
+            <option value="Rock">Rock</option>
+            <option value="Metal">Metal</option>
+        </select>
+        <input type="text" id="body" placeholder="Enter Review Here" required />
+        <select id="rating">
+            <option value="none" selected disabled hidden>Select a rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="submit" id="submit" />
+        <input type="text" id="userid" value="{{ id }}" hidden>
+    </form>
+</div>

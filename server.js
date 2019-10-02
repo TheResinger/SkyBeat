@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
+const Handlebars = require("handlebars");
 const flash = require("connect-flash");
 const session = require("express-session");
 const db = require("./models");
@@ -29,8 +30,8 @@ app.use(flash());
 
 // Global Vars
 app.use((req, res, next) => {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
+  res.locals.successMsg = req.flash("successMsg");
+  res.locals.errorMsg = req.flash("errorMsg");
   res.locals.error = req.flash("error");
   next();
 });
@@ -39,9 +40,17 @@ app.use((req, res, next) => {
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+Handlebars.registerHelper("goldstars", (n, block) => {
+  var accum = "";
+    for(let i = 0; i < n; i++){
+        accum += block.fn(i);
+    }
+
+  return accum;
+});
+
 // Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./routes/routes")(app);
 
 const syncOptions = { force: false };
 

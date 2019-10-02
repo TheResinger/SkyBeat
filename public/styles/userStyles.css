@@ -11,7 +11,8 @@
 }
 .user-form input[type="password"],
 .user-form input[type="text"],
-.user-form input[type="email"] {
+.user-form input[type="email"],
+.user-form select {
   width: 100%;
   padding: 15px;
   border: 1px solid #dddddd;
@@ -27,4 +28,18 @@
   cursor: pointer;
   font-weight: bold;
   color: #ffffff;
+}
+
+@media (min-width: 990px) {
+  .navbar-brand {
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    /**optional offset from top**/
+
+    top: 2%;
+  }
 }
