@@ -1,4 +1,4 @@
-<div class="user-form">
+{{!-- <div class="user-form">
     <h1>New Post</h1>
     <form id="newPost">
         <input placeholder="Enter Song Name" type="text" class="" id="songName" required />
@@ -31,4 +31,50 @@
         <input type="submit" id="submit" />
         <input type="text" id="userid" value="{{ id }}" hidden>
     </form>
-</div>
+</div> --}}
+
+{{> headerreview}}
+<section class="pb_cover_v3 overflow-hidden cover-bg-opacity border-dark text-left" id="section-home">
+    <div class="container">
+        {{> messages}}
+        <div class="row align-items-center justify-content-center ">
+            <div class="col-md-12 relative align-self-center user-form" style="border: 1px solid black; padding-right: 0px; padding-left: 0px;">
+                <form class="bg-white pb_form_v1" id="newPost">
+                    <h2 class="mb-4 mt-0 text-center">Enter your review.</h2>
+                    <input placeholder="Enter Song Name" type="text" class="" id="songName" required />
+                    <input type="text" id="artistName" placeholder="Enter Artist Here" required />
+                    <select id="genre">
+                        <option value="none" selected disabled hidden>Select a Genre</option>
+                        <option value="Alternative">Alternative</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Classical">Classical</option>
+                        <option value="Country">Country</option>
+                        <option value="Dance">Dance</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Hip-Hop/Rap">Hip-Hop</option>
+                        <option value="Hip-Hop/Rap">Rap</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Latin">Latin</option>
+                        <option value="Pop">Pop</option>
+                        <option value="R&B/Soul">R&B</option>
+                        <option value="R&B/Soul">Soul</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Metal">Metal</option>
+                    </select>
+                    <input type="text" id="body" placeholder="Enter Review Here" required />
+                    <select id="rating">
+                        <option value="none" selected disabled hidden>Select a rating</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <input type="submit" id="submit" />
+                    <input type="text" id="userid" value="{{ id }}" hidden>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

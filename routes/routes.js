@@ -7,7 +7,103 @@ const passport = require("passport");
 module.exports = function (app) {
   //html
   app.get("/", (req, res) => {
-    res.render("login");
+    res.render("register");
+  });
+  app.get("/api/posts/:genre", ensureAuthenticated, (req, res) => {
+    db.Post.findAll({
+      where: {
+        userId: req.user.id
+      }
+    }).then(postcount => {
+      db.Post.findAll().then(data => {
+        let totalcount = 0;
+        let genrecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        for (let i = 0; i < data.length; i++) {
+          switch (data[i].genre) {
+            case "Alternative":
+              genrecount[0] += 1;
+              totalcount +=1;
+              break;
+            case "Blues":
+              genrecount[1] += 1;
+              totalcount +=1;
+              break;
+            case "Classical":
+              genrecount[2] += 1;
+              totalcount +=1;
+              break;
+            case "Country":
+              genrecount[3] += 1;
+              totalcount +=1;
+              break;
+            case "Dance":
+              genrecount[4] += 1;
+              totalcount +=1;
+              break;
+            case "Electronic":
+              genrecount[5] += 1;
+              totalcount +=1;
+              break;
+            case "Hip-Hop/Rap":
+              genrecount[6] += 1;
+              totalcount +=1;
+              break;
+            case "Jazz":
+              genrecount[7] += 1;
+              totalcount +=1;
+              break;
+            case "Latin":
+              genrecount[8] += 1;
+              totalcount +=1;
+              break;
+            case "Pop":
+              genrecount[9] += 1;
+              totalcount +=1;
+              break;
+            case "R&B/Soul":
+              genrecount[10] += 1;
+              totalcount +=1;
+              break;
+            case "Rock":
+              genrecount[11] += 1;
+              totalcount +=1;
+              break;
+            case "Metal":
+              genrecount[12] += 1;
+              totalcount +=1;
+              break;
+          }
+        }
+        db.Post.findAll({
+          where: {
+            genre: req.params.genre
+          }
+        }).then(sorted => {
+          res.render("index", {
+            user: req.user.userName,
+            id: req.user.id,
+            totalCount: totalcount,
+            postCount: postcount.length,
+            g1: genrecount[0],
+            g2: genrecount[1],
+            g3: genrecount[2],
+            g4: genrecount[3],
+            g5: genrecount[4],
+            g6: genrecount[5],
+            g7: genrecount[6],
+            g8: genrecount[7],
+            g9: genrecount[8],
+            g10: genrecount[9],
+            g11: genrecount[10],
+            g12: genrecount[11],
+            g13: genrecount[12],
+            g14: genrecount[13],
+            g15: genrecount[14],
+            posts: sorted
+          });
+        });
+      });
+    });
   });
   app.get("/index", ensureAuthenticated, (req, res) => {
     db.Post.findAll({
@@ -16,55 +112,76 @@ module.exports = function (app) {
       }
     }).then(postcount => {
       db.Post.findAll().then(data => {
-        console.log(req.user.userName);
-        console.log(JSON.stringify(data));
-        let genrecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let totalcount = 0;
+        let genrecount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         for (let i = 0; i < data.length; i++) {
           switch (data[i].genre) {
             case "Alternative":
               genrecount[0] += 1;
+              totalcount +=1;
               break;
             case "Blues":
               genrecount[1] += 1;
+              totalcount +=1;
               break;
             case "Classical":
               genrecount[2] += 1;
+              totalcount +=1;
               break;
             case "Country":
               genrecount[3] += 1;
+              totalcount +=1;
               break;
             case "Dance":
               genrecount[4] += 1;
+              totalcount +=1;
               break;
             case "Electronic":
               genrecount[5] += 1;
+              totalcount +=1;
               break;
-            case "Hip-Hop/Rap":
+            case "Hip-Hop":
               genrecount[6] += 1;
+              totalcount +=1;
+              break;
+            case "Rap":
+              genrecount[7] += 1;
+              totalcount +=1;
               break;
             case "Jazz":
-              genrecount[7] += 1;
+              genrecount[8] += 1;
+              totalcount +=1;
               break;
             case "Latin":
-              genrecount[8] += 1;
+              genrecount[9] += 1;
+              totalcount +=1;
               break;
             case "Pop":
-              genrecount[9] += 1;
-              break;
-            case "R&B/Soul":
               genrecount[10] += 1;
+              totalcount +=1;
+              break;
+            case "R&B":
+              genrecount[11] += 1;
+              totalcount +=1;
+              break;
+            case "Soul":
+              genrecount[12] += 1;
+              totalcount +=1;
               break;
             case "Rock":
-              genrecount[11] += 1;
+              genrecount[13] += 1;
+              totalcount +=1;
               break;
             case "Metal":
-              genrecount[12] += 1;
+              genrecount[14] += 1;
+              totalcount +=1;
               break;
           }
         }
         res.render("index", {
           user: req.user.userName,
           id: req.user.id,
+          totalCount: totalcount,
           postCount: postcount.length,
           g1: genrecount[0],
           g2: genrecount[1],
@@ -77,8 +194,10 @@ module.exports = function (app) {
           g9: genrecount[8],
           g10: genrecount[9],
           g11: genrecount[10],
-          g13: genrecount[11],
+          g12: genrecount[11],
           g13: genrecount[12],
+          g14: genrecount[13],
+          g15: genrecount[14],
           posts: data
         });
       });
@@ -103,13 +222,8 @@ module.exports = function (app) {
     res.redirect("/login");
   });
 
-  app.get("*", (req, res) => {
-    res.render("404");
-  });
-
   //api
   app.post("/register", (req, res) => {
-    console.log(req.body);
     const { username, email, password } = req.body;
     let errors = [];
 
@@ -124,7 +238,6 @@ module.exports = function (app) {
     }
 
     if (errors.length > 0) {
-      console.log(errors);
       res.render("register", {
         errors: errors,
       });
@@ -154,7 +267,6 @@ module.exports = function (app) {
   });
 
   app.post("/api/posts", (req, res) => {
-    console.log(req.body);
     db.Post.create(req.body).then(dbPost => res.json(dbPost));
   });
 
@@ -175,7 +287,9 @@ module.exports = function (app) {
       res.json(dbUser);
     });
   });
-  app.get("/api/posts/:genre", (req, res) => {
 
-  })
+  
+  app.get("*", (req, res) => {
+    res.render("404");
+  });
 };
