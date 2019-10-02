@@ -44,32 +44,40 @@ module.exports = function (app) {
               genrecount[5] += 1;
               totalcount +=1;
               break;
-            case "Hip-Hop/Rap":
+            case "Hip-Hop":
               genrecount[6] += 1;
               totalcount +=1;
               break;
-            case "Jazz":
+            case "Rap":
               genrecount[7] += 1;
               totalcount +=1;
               break;
-            case "Latin":
+            case "Jazz":
               genrecount[8] += 1;
               totalcount +=1;
               break;
-            case "Pop":
+            case "Latin":
               genrecount[9] += 1;
               totalcount +=1;
               break;
-            case "R&B/Soul":
+            case "Pop":
               genrecount[10] += 1;
               totalcount +=1;
               break;
-            case "Rock":
+            case "R&B":
               genrecount[11] += 1;
               totalcount +=1;
               break;
-            case "Metal":
+            case "Soul":
               genrecount[12] += 1;
+              totalcount +=1;
+              break;
+            case "Rock":
+              genrecount[13] += 1;
+              totalcount +=1;
+              break;
+            case "Metal":
+              genrecount[14] += 1;
               totalcount +=1;
               break;
           }
