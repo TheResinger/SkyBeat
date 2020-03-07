@@ -38,7 +38,7 @@ npm install
 * [MySql](https://www.mysql.com/) - SQL Database
 * [Node.js](https://nodejs.org/en) - JavaScript Runtime
 * [Heroku](https://www.heroku.com/) - Web Application Hosting
-* [Bootstrap](https://handlebarsjs.com/) - Javascript Templating Engine
+* [Bootstrap](https://getbootstrap.com/) - CSS Template
 * [bCrypt](https://www.npmjs.com/package/bcrypt) - Password hashing algorythm for secure access. 
 * [Sequalize](https://sequelize.org/) - Node based ORM for MySQL queries
 
